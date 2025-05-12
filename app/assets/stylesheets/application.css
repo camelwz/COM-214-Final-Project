@@ -1,0 +1,18 @@
+body {
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.badge-priority {
+  background-color: crimson;
+  color: white;
+}
+
+.badge-completed {
+  background-color: forestgreen;
+  color: white;
+}

@@ -1,0 +1,35 @@
+<h2>Your ToDos</h2>
+
+<div class="mb-3">
+  <%= link_to "New ToDo", new_todo_path, class: "btn btn-success me-2" %>
+  <%= link_to "Completed ToDos", completed_todos_path, class: "btn btn-secondary" %>
+</div>
+
+<div class="vstack gap-3">
+  <% @todos.each do |todo| %>
+    <% if current_user.id==todo.user_id %>
+      <div class="p-3 border rounded bg-light d-flex justify-content-between align-items-center">
+        
+        <!-- Left side: ToDo details -->
+        <div>
+          <strong><%= link_to todo.title, todo_path(todo) %></strong><br>
+          <small class="text-muted"><%= todo.category.name if todo.category %></small><br>
+          <span><%= todo.completed ? '✅ Done' : '❌ Not done' %></span>
+          <% if todo.priority %> | 🔥 Priority <% end %>
+
+          <div class="d-flex gap-2 mt-2">
+            <%= link_to "Edit", edit_todo_path(todo), class: "btn btn-sm btn-primary" %>
+            <%= button_to "Delete", todo_path(todo), method: :delete, class: "btn btn-sm btn-danger" %>
+          </div>
+        </div>
+
+        <!-- Right side: Mark as Completed -->
+        <% unless todo.completed %>
+          <%= button_to "Mark as Completed", todo_path(todo), method: :patch, params: { todo: { completed: true } }, class: "btn btn-sm btn-success" %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+
